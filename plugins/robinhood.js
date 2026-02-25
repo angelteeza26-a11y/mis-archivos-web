@@ -7,7 +7,7 @@ async function popularNovels(page) {
     {
       name: "Verdant (Twoony)",
       link: "Ver-Two/chap_1.xhtml",
-      cover: "https://raw.githubusercontent.com/angelteeza26-a11y/mis-archivos-web/main/cover.jpg" 
+      cover: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1768245550i/246490524.jpg" 
     }
   ];
 }
