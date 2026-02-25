@@ -1,11 +1,8 @@
-[
-  {
-    "id": "robinhood_lib_special",
-    "name": "Robin Hood Library",
-    "site": "https://angelteeza26-a11y.github.io/mis-archivos-web/",
-    "lang": "Spanish",
-    "version": "1.0.0",
-    "url": "https://raw.githubusercontent.com/angelteeza26-a11y/mis-archivos-web/main/plugins/robinhood.js",
-    "iconUrl": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1768245550i/246490524.jpg"
-  }
+{
+"id": "robinhood_lib",
+"name": "Robin Hood Library",
+"url": "",
+"version": "1.0.4",
+"iconUrl": ""
+}
 ]
