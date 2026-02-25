@@ -36,7 +36,7 @@ function parseChapter(chapterPath) {
 module.exports = {
   default: {
     id: sourceId,
-    sourceName: sourceName,
+    name: sourceName,        // ← CAMBIADO AQUÍ
     sourceUrl: baseUrl,
     site: baseUrl,
     version: "1.0.4",
