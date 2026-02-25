@@ -36,9 +36,11 @@ function parseChapter(chapterPath) {
 module.exports = {
   default: {
     id: sourceId,
-    name: sourceName,
+    sourceName: sourceName,
+    sourceUrl: baseUrl,
     site: baseUrl,
     version: "1.0.4",
+    lang: "Español",
     popularNovels: popularNovels,
     parseNovel: parseNovel,
     parseChapter: parseChapter
