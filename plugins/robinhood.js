@@ -1,42 +1,46 @@
-const sourceId = "robinhood_lib";
-const sourceName = "Robin Hood Library";
-const baseUrl = "";
+var sourceId = "robinhood_lib";
+var sourceName = "Robin Hood Library";
+var baseUrl = "";
 
-const RobinHoodLibrary = {
-id: sourceId,
-name: sourceName,
-site: baseUrl,
-version: "1.0.4",
-icon: "",
-
-popularNovels: async function (page) {
-return [
+function popularNovels(page) {
+return Promise.resolve([
 {
 name: "Verdant (Twoony)",
 path: "Ver-Two/chap_1.xhtml",
 cover: ""
 }
-];
-},
+]);
+}
 
-parseNovel: async function (novelPath) {
-return {
+function parseNovel(novelPath) {
+return Promise.resolve({
 name: "Verdant (Twoony)",
 path: novelPath,
 chapters: [{ name: "Capítulo 1", path: novelPath }]
-};
-},
+});
+}
 
-parseChapter: async function (chapterPath) {
-const response = await fetch(this.site + chapterPath);
-const html = await response.text();
-const parts = html.split('<div class="calibreEbookContent">');
-const chapterText = parts.length > 1 ? parts[1].split('<div class="calibreEbNavBottom">')[0] : "Error";
+function parseChapter(chapterPath) {
+return fetch(baseUrl + chapterPath)
+.then(function(res) { return res.text(); })
+.then(function(html) {
+var parts = html.split('<div class="calibreEbookContent">');
+var text = parts.length > 1 ? parts[1].split('<div class="calibreEbNavBottom">')[0] : "Error de carga";
 return {
 chapterName: "Capítulo 1",
-chapterText: chapterText
+chapterText: text
 };
+});
+}
+
+module.exports = {
+default: {
+id: sourceId,
+name: sourceName,
+site: baseUrl,
+version: "1.0.4",
+popularNovels: popularNovels,
+parseNovel: parseNovel,
+parseChapter: parseChapter
 }
 };
-
-module.exports = { default: RobinHoodLibrary };
