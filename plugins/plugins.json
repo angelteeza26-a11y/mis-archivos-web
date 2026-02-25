@@ -1,0 +1,11 @@
+[
+  {
+    "id": "robin-hood-lib",
+    "name": "Robin Hood Library",
+    "site": "https://angelteeza26-a11y.github.io/mis-archivos-web/",
+    "lang": "Spanish",
+    "version": "1.0.0",
+    "url": "https://raw.githubusercontent.com/angelteeza26-a11y/mis-archivos-web/main/plugins/robinhood.js",
+    "iconUrl": "https://raw.githubusercontent.com/angelteeza26-a11y/mis-archivos-web/main/icon.png"
+  }
+]
