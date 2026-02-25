@@ -1,39 +1,36 @@
-const RobinHoodLibrary = {
-  id: "robinhood_lib",
-  name: "Robin Hood Library",
-  site: "https://angelteeza26-a11y.github.io/mis-archivos-web/",
-  version: "1.0.0",
-  icon: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1768245550i/246490524.jpg",
+const sourceId = 123456;
+const sourceName = "Robin Hood Library";
+const baseUrl = "https://angelteeza26-a11y.github.io/mis-archivos-web/";
 
-  popularNovels: async function() {
-    return [{
+async function popularNovels(page) {
+  return [
+    {
       name: "Verdant (Twoony)",
-      path: "Ver-Two/chap_1.xhtml",
+      link: "Ver-Two/chap_1.xhtml",
       cover: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1768245550i/246490524.jpg"
-    }];
-  },
+    }
+  ];
+}
 
-  parseNovel: async function(path) {
-    return {
-      name: "Verdant (Twoony)",
-      path: path,
-      chapters: [{ name: "Capítulo 1", path: path }]
-    };
-  },
+async function parseNovel(novelLink) {
+  return {
+    name: "Verdant (Twoony)",
+    sourceId: sourceId,
+    chapters: [{ name: "Capítulo 1", link: novelLink }]
+  };
+}
 
-  parseChapter: async function(path) {
-    const response = await fetch(this.site + path);
-    const html = await response.text();
-    // Limpieza de texto segura
-    const parts = html.split('<div class="calibreEbookContent">');
-    if (parts.length < 2) return { chapterText: "Error de formato" };
-    const chapterText = parts[1].split('<div class="calibreEbNavBottom">')[0];
+async function parseChapter(chapterLink) {
+  const url = baseUrl + chapterLink;
+  const response = await fetch(url);
+  const html = await response.text();
+  
+  const chapterText = html.split('<div class="calibreEbookContent">')[1].split('<div class="calibreEbNavBottom">')[0];
 
-    return {
-      chapterName: "Capítulo 1",
-      chapterText: chapterText
-    };
-  }
-};
+  return {
+    chapterName: "Capítulo 1",
+    chapterText: chapterText
+  };
+}
 
-export default RobinHoodLibrary;
+// En v2.0.3 NO se usa export default. Se dejan las funciones sueltas.
