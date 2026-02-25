@@ -1,36 +1,42 @@
-const sourceId = 123456;
+const sourceId = "robinhood_lib";
 const sourceName = "Robin Hood Library";
-const baseUrl = "https://angelteeza26-a11y.github.io/mis-archivos-web/";
+const baseUrl = "";
 
-async function popularNovels(page) {
-  return [
-    {
-      name: "Verdant (Twoony)",
-      link: "Ver-Two/chap_1.xhtml",
-      cover: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1768245550i/246490524.jpg"
-    }
-  ];
+const RobinHoodLibrary = {
+id: sourceId,
+name: sourceName,
+site: baseUrl,
+version: "1.0.4",
+icon: "",
+
+popularNovels: async function (page) {
+return [
+{
+name: "Verdant (Twoony)",
+path: "Ver-Two/chap_1.xhtml",
+cover: ""
 }
+];
+},
 
-async function parseNovel(novelLink) {
-  return {
-    name: "Verdant (Twoony)",
-    sourceId: sourceId,
-    chapters: [{ name: "Capítulo 1", link: novelLink }]
-  };
+parseNovel: async function (novelPath) {
+return {
+name: "Verdant (Twoony)",
+path: novelPath,
+chapters: [{ name: "Capítulo 1", path: novelPath }]
+};
+},
+
+parseChapter: async function (chapterPath) {
+const response = await fetch(this.site + chapterPath);
+const html = await response.text();
+const parts = html.split('<div class="calibreEbookContent">');
+const chapterText = parts.length > 1 ? parts[1].split('<div class="calibreEbNavBottom">')[0] : "Error";
+return {
+chapterName: "Capítulo 1",
+chapterText: chapterText
+};
 }
+};
 
-async function parseChapter(chapterLink) {
-  const url = baseUrl + chapterLink;
-  const response = await fetch(url);
-  const html = await response.text();
-  
-  const chapterText = html.split('<div class="calibreEbookContent">')[1].split('<div class="calibreEbNavBottom">')[0];
-
-  return {
-    chapterName: "Capítulo 1",
-    chapterText: chapterText
-  };
-}
-
-// En v2.0.3 NO se usa export default. Se dejan las funciones sueltas.
+module.exports = { default: RobinHoodLibrary };
